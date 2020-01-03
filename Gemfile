@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem 'jekyll'
+gem 'html-proofer'
 gem 'minimal-mistakes-jekyll', '~> 4.17', '>= 4.17.2'
 
 # If you have any plugins, put them here!
