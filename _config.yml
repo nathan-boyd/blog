@@ -42,6 +42,8 @@ theme: minimal-mistakes-jekyll
 
 paginate: 5
 
+include: ["_pages"]
+
 exclude:
   - Gemfile
   - Gemfile.lock
