@@ -95,7 +95,8 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll
-  jekyll-feed (~> 0.6)
+  jekyll-feed
+  jekyll-include-cache
   jekyll-optional-front-matter
   jekyll-paginate
   jekyll-readme-index

@@ -6,7 +6,6 @@ gem 'minimal-mistakes-jekyll', '~> 4.17', '>= 4.17.2'
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.6"
   gem "jekyll-optional-front-matter"
   gem "jekyll-paginate"
   gem "jekyll-readme-index"
@@ -16,4 +15,6 @@ group :jekyll_plugins do
   gem "jekyll-sitemap"
   gem "jekyll-titles-from-headings"
   gem "jekyll-replace-img"
+  gem "jekyll-feed"
+  gem "jekyll-include-cache"
 end
