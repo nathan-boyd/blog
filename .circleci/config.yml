@@ -28,7 +28,7 @@ jobs:
           name: HTMLProofer tests
           command: |
               bundle exec htmlproofer \
-              --file-ignore '_site/404.html' \
+              --file-ignore './_site/404.html' \
               --allow-hash-href \
               --check-html \
               --disable-external \
