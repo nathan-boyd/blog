@@ -53,7 +53,9 @@ test() {
 
     docker run --rm \
         --volume="$PWD/_site:/srv/jekyll" \
-        18fgsa/html-proofer --file-ignore '/srv/jekyll/404.html' /srv/jekyll
+        18fgsa/html-proofer \
+            --file-ignore '/srv/jekyll/404.html' \
+            /srv/jekyll
 
     logInfo "completed testing site"
 }
