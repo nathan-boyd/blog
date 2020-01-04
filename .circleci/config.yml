@@ -37,3 +37,33 @@ jobs:
           root: ./
           paths:
             - _site
+  deploy:
+    <<: *defaults
+    docker:
+      - image: circleci/golang:1.13-alpine
+    steps:
+      - run:
+          name: Install Docker client
+          command: apk add docker-cli
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Build image
+          command: |
+            echo $DOCKER_PASSWORD | base64 --decode | docker login -u DOCKER_USERNAME --password-stdin
+            docker build . -t $DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG
+            docker push $DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+            tags:
+              # semver tags only
+              only: /^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/
