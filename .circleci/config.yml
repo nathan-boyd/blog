@@ -57,14 +57,13 @@ jobs:
                 SEMVER=$(echo "$CHECKOUT" | grep -oE "[0-9]+[.][0-9]+[.][0-9]+")
             fi
 
-            if [ $ISTAG != true ]; then
+            if [ $ISTAG == true ]; then
+                echo $DOCKER_PASSWORD | base64 --decode | docker login -u $DOCKER_USERNAME --password-stdin
+                docker build . -t "$DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG"
+                docker push "$DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG"
+            else
                 echo "publish skipped, publish only runs when tags are checked out"
-                return
             fi
-
-            echo $DOCKER_PASSWORD | base64 --decode | docker login -u $DOCKER_USERNAME --password-stdin
-            docker build . -t "$DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG"
-            docker push "$DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG"
 workflows:
   version: 2
   test-deploy:
