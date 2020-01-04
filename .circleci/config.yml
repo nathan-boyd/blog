@@ -27,8 +27,9 @@ jobs:
       - run:
           name: HTMLProofer tests
           command: |
-            bundle exec htmlproofer ./_site \
-              --file-ignore '/srv/jekyll/404.html'
+            bundle exec htmlproofer \
+              --file-ignore '/_site/404.html' \
+              ./_site
       - persist_to_workspace:
           root: ./
           paths:
