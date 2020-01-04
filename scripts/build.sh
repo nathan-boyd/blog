@@ -17,7 +17,6 @@ command -v git >/dev/null 2>&1 || { echo "git is required but not installed" >&2
 
 CHECKOUT=$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD)
 if grep -q '^tags/' <<< "$CHECKOUT"; then
-    logInfo "commit is tagged"
     ISTAG=true
     SEMVER=$(echo "$CHECKOUT" | grep -oE "[0-9]+[.][0-9]+[.][0-9]+")
 fi
@@ -52,10 +51,10 @@ test() {
     logInfo "testing site"
 
     docker run --rm \
-        --volume="$PWD/_site:/srv/jekyll" \
+        --volume="$PWD/_site:/_site" \
         18fgsa/html-proofer \
-            --file-ignore '/srv/jekyll/404.html' \
-            /srv/jekyll
+            --file-ignore '/_site/404.html' \
+            /_site
 
     logInfo "completed testing site"
 }
