@@ -27,11 +27,12 @@ jobs:
       - run:
           name: HTMLProofer tests
           command: |
-              bundle exec htmlproofer ./_site \
+              bundle exec htmlproofer \
               --file-ignore '/_site/404.html' \
               --allow-hash-href \
               --check-html \
-              --disable-external
+              --disable-external \
+              ./_site
       - persist_to_workspace:
           root: ./
           paths:
