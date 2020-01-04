@@ -32,12 +32,10 @@ footer:
 description: > # this means to ignore newlines until "baseurl:"
   musings
 
-baseurl: ""
-
-url: ""
+baseurl: "/"
+url: "http://blog.localdomain"
 
 markdown: kramdown
-
 theme: minimal-mistakes-jekyll
 
 paginate: 5
