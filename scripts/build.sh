@@ -9,10 +9,6 @@ DOCKER_PASSWORD=$2
 
 JEKYLL_VERSION=3.8
 
-REPO=nathanboyd
-IMAGE=blog
-IMAGE_TAG="$REPO/$IMAGE:$SEMVER"
-
 ISTAG=false
 SEMVER=0.0.1
 
@@ -25,6 +21,10 @@ if grep -q '^tags/' <<< "$CHECKOUT"; then
     ISTAG=true
     SEMVER=$(echo "$CHECKOUT" | grep -oE "[0-9]+[.][0-9]+[.][0-9]+")
 fi
+
+REPO=nathanboyd
+IMAGE=blog
+IMAGE_TAG="$REPO/$IMAGE:$SEMVER"
 
 log() {
     while read -r data; do
