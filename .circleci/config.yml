@@ -29,10 +29,6 @@ jobs:
           command: |
             bundle exec htmlproofer ./_site \
               --file-ignore '/srv/jekyll/404.html'
-              --allow-hash-href \
-              #              --check-favicon  \
-              --check-html \
-              --disable-external
       - persist_to_workspace:
           root: ./
           paths:
