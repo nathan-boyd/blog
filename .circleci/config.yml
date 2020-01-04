@@ -41,7 +41,7 @@ jobs:
   deploy:
     <<: *defaults
     docker:
-      - image: circleci/golang:1.13-alpine
+      - image: circleci/golang
     steps:
       - attach_workspace:
           at: ./
