@@ -42,9 +42,6 @@ jobs:
     docker:
       - image: circleci/golang
     steps:
-      - run:
-          name: Install Docker client
-          command: apk add docker-cli
       - attach_workspace:
           at: ./
       - run:
