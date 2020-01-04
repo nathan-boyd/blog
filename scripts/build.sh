@@ -2,7 +2,6 @@
 
 set -e
 
-
 source ./scripts/util.sh
 
 DOCKER_USERNAME=$1
@@ -82,7 +81,7 @@ tag() {
 
 publish() {
     if [ $ISTAG != true ]; then
-        logWarn "publish skipped, publish only runs on tagged commits"
+        logWarn "publish skipped, publish only runs when tags are checked out"
         return
     fi
 
