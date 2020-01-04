@@ -1,6 +1,6 @@
 defaults: &defaults
   working_directory: ~/repo
-version: 2
+version: 2.1
 jobs:
   build:
     <<: *defaults
@@ -41,7 +41,7 @@ jobs:
   deploy:
     <<: *defaults
     docker:
-      - image: circleci/docker
+      - image: circleci/golang:1.13-alpine
     steps:
       - attach_workspace:
           at: ./
