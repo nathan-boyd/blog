@@ -37,6 +37,7 @@ jobs:
           root: ./
           paths:
             - _site
+            - .git
   deploy:
     <<: *defaults
     docker:
