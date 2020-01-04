@@ -47,6 +47,20 @@ jobs:
       - run:
           name: Build image
           command: |
+            ISTAG=false
+            SEMVER=0.0.1
+
+            CHECKOUT=$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD)
+            if grep -q '^tags/' <<< "$CHECKOUT"; then
+                ISTAG=true
+                SEMVER=$(echo "$CHECKOUT" | grep -oE "[0-9]+[.][0-9]+[.][0-9]+")
+            fi
+
+            if [ $ISTAG != true ]; then
+                echo "publish skipped, publish only runs when tags are checked out"
+                return
+            fi
+
             echo $DOCKER_PASSWORD | base64 --decode | docker login -u $DOCKER_USERNAME --password-stdin
             docker build . -t "$DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG"
             docker push "$DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG"
@@ -62,5 +76,5 @@ workflows:
           requires:
             - build
           filters:
-            tags:
-              only: /^v.*/
+            branches:
+              only: master
