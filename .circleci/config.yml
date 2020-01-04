@@ -43,8 +43,7 @@ jobs:
     docker:
       - image: circleci/golang
     steps:
-      - setup_remote_docker:
-          version: 18.06.0-ce
+      - setup_remote_docker
       - attach_workspace:
           at: ./
       - run: echo $DOCKER_PASSWORD | base64 --decode | docker login -u $DOCKER_USERNAME --password-stdin
