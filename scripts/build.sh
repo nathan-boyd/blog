@@ -80,6 +80,9 @@ tag() {
 }
 
 publish() {
+
+    logInfo "starting publish"
+
     if [ $ISTAG != true ]; then
         logWarn "publish skipped, publish only runs when tags are checked out"
         return
@@ -89,8 +92,12 @@ publish() {
     [ -n "$DOCKER_USERNAME" ] || { logErr "DOCKER_USERNAME is required" >&2; exit 1; }
     [ -n "$DOCKER_PASSWORD" ] || { logErr "DOCKER_PASSWORD is required" >&2; exit 1; }
 
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+    logInfo "running docker login"
+    echo $DOCKER_PASSWORD | docker login -u="$DOCKER_USERNAME" --password-stdin
+    logInfo "completed docker login"
+
     docker push $IMAGE_TAG
+    logInfo "completed publish"
 }
 
 {
