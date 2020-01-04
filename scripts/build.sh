@@ -25,17 +25,6 @@ log() {
     done
 }
 
-doctor() {
-    logInfo "checking config with running doctor "
-
-    docker run --rm \
-        --volume="$PWD/vendor/bundle:/usr/local/bundle" \
-        --volume="$PWD:/srv/jekyll" \
-        -it jekyll/jekyll:$JEKYLL_VERSION \
-        jekyll doctor
-
-    logInfo "completed doctor"
-}
 
 build() {
     logInfo "building site"
@@ -49,21 +38,41 @@ build() {
     logInfo "completed building site"
 }
 
-tag() {
-    logInfo "building image with tag $SEMVER"
-    docker build . -t "$REPO/$IMAGE:$SEMVER"
-    logInfo "completed building image"
+test() {
+    logInfo "testing site"
+
+    docker run --rm \
+        --volume="$PWD/_site:/srv/jekyll" \
+        18fgsa/html-proofer --file-ignore '/srv/jekyll/404.html' /srv/jekyll
+
+    logInfo "completed testing site"
 }
 
-test() {
-    logInfo "Testing site"
-    docker run --rm --volume="$PWD/_site:/srv/jekyll" 18fgsa/html-proofer /srv/jekyll
-    logInfo "Testing complete"
+doctor() {
+    logInfo "checking config"
+
+    docker run --rm \
+        --volume="$PWD/vendor/bundle:/usr/local/bundle" \
+        --volume="$PWD:/srv/jekyll" \
+        -it jekyll/jekyll:$JEKYLL_VERSION \
+        jekyll doctor
+
+    logInfo "completed checking config"
+}
+
+tag() {
+    IMAGE_TAG="$REPO/$IMAGE:$SEMVER"
+
+    logInfo "building image with tag IMAGE_TAG"
+
+    docker build . -t $IMAGE_TAG
+
+    logInfo "completed building image"
 }
 
 publish() {
     if [ $ISTAG != true ]; then
-        echo "Publish only from tag checkout; skipping"
+        logWarn "publish skipped, publish only runs on tagged commits"
         return
     fi
 }
@@ -72,9 +81,9 @@ publish() {
     logInfo "tag is "\""$Tag"\"""
     logInfo "semver is "\""$SEMVER"\"""
 
-    doctor
     build
     test
+    doctor
     tag
     publish
 

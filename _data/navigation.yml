@@ -15,43 +15,43 @@ docs:
   - title: Getting Started
     children:
       - title: "Quick-Start Guide"
-        url: /docs/quick-start-guide/
+        url: /
       - title: "Structure"
-        url: /docs/structure/
+        url: /
       - title: "Installation"
-        url: /docs/installation/
+        url: /
       - title: "Upgrading"
-        url: /docs/upgrading/
+        url: /
 
   - title: Customization
     children:
       - title: "Configuration"
-        url: /docs/configuration/
+        url: /
       - title: "Navigation"
-        url: /docs/navigation/
+        url: /
       - title: "UI Text"
-        url: /docs/ui-text/
+        url: /
       - title: "Authors"
-        url: /docs/authors/
+        url: /
       - title: "Layouts"
-        url: /docs/layouts/
+        url: /
 
   - title: Content
     children:
       - title: "Working with Posts"
-        url: /docs/posts/
+        url: /
       - title: "Working with Pages"
-        url: /docs/pages/
+        url: /
       - title: "Working with Collections"
-        url: /docs/collections/
+        url: /
       - title: "Helpers"
-        url: /docs/helpers/
+        url: /
       - title: "Utility Classes"
-        url: /docs/utility-classes/
+        url: /
 
   - title: Extras
     children:
       - title: "Stylesheets"
-        url: /docs/stylesheets/
+        url: /
       - title: "JavaScript"
-        url: /docs/javascript/
+        url: /
