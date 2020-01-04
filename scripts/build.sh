@@ -2,15 +2,27 @@
 
 set -e
 
+
 source ./scripts/util.sh
+
+DOCKER_USERNAME=$1
+DOCKER_PASSWORD=$2
+
+JEKYLL_VERSION=3.8
+
+REPO=nathanboyd
+IMAGE=blog
+IMAGE_TAG="$REPO/$IMAGE:$SEMVER"
 
 ISTAG=false
 SEMVER=0.0.1
-REPO=nathanboyd
-IMAGE=blog
-JEKYLL_VERSION=3.8
 
+command -v docker >/dev/null 2>&1 || { echo "docker is required but not installed" >&2; exit 1; }
+command -v git >/dev/null 2>&1 || { echo "git is required but not installed" >&2; exit 1; }
+
+CHECKOUT=$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD)
 if grep -q '^tags/' <<< "$CHECKOUT"; then
+    logInfo "commit is tagged"
     ISTAG=true
     SEMVER=$(echo "$CHECKOUT" | grep -oE "[0-9]+[.][0-9]+[.][0-9]+")
 fi
@@ -24,7 +36,6 @@ log() {
         fi
     done
 }
-
 
 build() {
     logInfo "building site"
@@ -61,9 +72,8 @@ doctor() {
 }
 
 tag() {
-    IMAGE_TAG="$REPO/$IMAGE:$SEMVER"
 
-    logInfo "building image with tag IMAGE_TAG"
+    logInfo "building image with tag $IMAGE_TAG"
 
     docker build . -t $IMAGE_TAG
 
@@ -75,10 +85,16 @@ publish() {
         logWarn "publish skipped, publish only runs on tagged commits"
         return
     fi
+
+    # Required; if any are empty error and exit 1
+    [ -n "$DOCKER_USERNAME" ] || { logErr "DOCKER_USERNAME is required" >&2; exit 1; }
+    [ -n "$DOCKER_PASSWORD" ] || { logErr "DOCKER_PASSWORD is required" >&2; exit 1; }
+
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+    docker push $IMAGE_TAG
 }
 
 {
-    logInfo "tag is "\""$Tag"\"""
     logInfo "semver is "\""$SEMVER"\"""
 
     build

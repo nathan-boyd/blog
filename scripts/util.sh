@@ -12,6 +12,12 @@ function logWarn (){
     echo -e "${GREEN}[INFO]:${NO_COLOR} $*"
 }
 
+function logErr (){
+    RED='\033[0;91m'
+	NO_COLOR='\033[0m'
+    echo -e "${RED}[ERRO]:${NO_COLOR} $*"
+}
+
 function logInfo (){
     GREEN='\033[0;32m'
 	NO_COLOR='\033[0m'
