@@ -104,12 +104,21 @@ workflows:
       - doctor:
           requires:
             - bundle
+          filters:
+            branches:
+              only: master
       - build:
           requires:
             - bundle
+          filters:
+            branches:
+              only: master
       - test:
           requires:
             - build
+          filters:
+            branches:
+              only: master
   publish:
     jobs:
       - bundle:
@@ -121,14 +130,34 @@ workflows:
       - doctor:
           requires:
             - bundle
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
       - build:
           requires:
             - bundle
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
       - test:
           requires:
             - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
       - publish:
           requires:
             - build
             - doctor
             - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
