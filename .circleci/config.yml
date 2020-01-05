@@ -95,7 +95,22 @@ jobs:
       - run: docker push "$DOCKER_REPO/$DOCKER_IMAGE:$CIRCLE_TAG"
 workflows:
   version: 2
-  test-deploy:
+  build-master:
+    jobs:
+      - bundle:
+          filters:
+            branches:
+              only: master
+      - doctor:
+          requires:
+            - bundle
+      - build:
+          requires:
+            - bundle
+      - test:
+          requires:
+            - build
+  publish:
     jobs:
       - bundle:
           filters:
@@ -106,34 +121,14 @@ workflows:
       - doctor:
           requires:
             - bundle
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
       - build:
           requires:
             - bundle
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
       - test:
           requires:
             - build
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
       - publish:
           requires:
             - build
             - doctor
             - test
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
