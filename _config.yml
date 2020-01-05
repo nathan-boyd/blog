@@ -1,12 +1,13 @@
 title: "On software"
-
 name: "Nathan Boyd"
-
 email: nathan@engineernathan.org
+logo: "/assets/images/wizard.png"
+
+url: "http://blog.engineernathan.org"
 
 author:
   name: "Nathan Boyd"
-  avatar: "/assets/img/wizard.png"
+  avatar: "/assets/images/bio-photo.jpg"
   bio: "your host"
   location: "Indianapolis"
   links:
@@ -32,9 +33,6 @@ footer:
 description: > # this means to ignore newlines until "baseurl:"
   musings
 
-baseurl: "/"
-url: "http://blog.engineernathan.org"
-
 markdown: kramdown
 theme: minimal-mistakes-jekyll
 
@@ -52,20 +50,14 @@ exclude:
   - vendor/ruby/
 
 plugins:
-  - jekyll-feed
   - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
 
 timezone: America/Indianapolis
-
-
-sidebar:
-  - title: "Title"
-    image: http://placehold.it/350x250
-    image_alt: "image"
-    text: "Some text here."
-  - title: "Another Title"
-    text: "More text here."
-    nav: sidebar-sample
 
 minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
 
@@ -74,18 +66,22 @@ masthead_title: "On Software"
 defaults:
   # _posts
   - scope:
-      path: ""
+      path: "_posts"
       type: posts
     values:
       layout: single
       author_profile: true
       read_time: true
-      comments: false
+      comments: true
       share: true
       related: true
-      sidebar:
-        nav: "docs"
+  # _pages
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
 
 search: true
-
 search_full_content: true
