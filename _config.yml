@@ -1,13 +1,22 @@
-title: "On software"
+masthead_title: "On Software"
 
-name: "Nathan Boyd"
+name: &name "Nathan Boyd"
+description: &name "Nathan Boyd"
 
-email: nathan@engineernathan.org
+
+search: true
+search_full_content: true
+
+baseurl: "/blog"
+url: "http://engineernathan.org"
+
+markdown: kramdown
+theme: minimal-mistakes-jekyll
 
 author:
-  name: "Nathan Boyd"
-  avatar: "/assets/img/wizard.png"
-  bio: "Im a software engineer"
+  name: *name
+  bio: "foo"
+  avatar: "/assets/images/michael-rose.jpg"
   location: "Indianapolis"
   links:
     - label: "Twitter"
@@ -16,9 +25,6 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/nathan-boyd"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/mmistakes"
 
 footer:
   links:
@@ -28,15 +34,6 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/nathan-boyd"
-
-description: > # this means to ignore newlines until "baseurl:"
-  musings
-
-baseurl: "/"
-url: "http://blog.localdomain"
-
-markdown: kramdown
-theme: minimal-mistakes-jekyll
 
 paginate: 5
 
@@ -57,19 +54,8 @@ plugins:
 
 timezone: America/Indianapolis
 
-
-sidebar:
-  - title: "Title"
-    image: http://placehold.it/350x250
-    image_alt: "image"
-    text: "Some text here."
-  - title: "Another Title"
-    text: "More text here."
-    nav: sidebar-sample
-
 minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
 
-masthead_title: "On Software"
 
 defaults:
   # _posts
@@ -85,7 +71,16 @@ defaults:
       related: true
       sidebar:
         nav: "docs"
-
-search: true
-
-search_full_content: true
+  # _pages
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
+      related: true
+      sidebar:
+        nav: "docs"

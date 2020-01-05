@@ -1,4 +1,3 @@
-
 main:
   - title: "Posts"
     url: /year-archive/
@@ -8,50 +7,16 @@ main:
     url: /tags/
   - title: "Pages"
     url: /page-archive/
-  - title: "Collections"
-    url: /collection-archive/
 
 docs:
-  - title: Getting Started
+  - title: Links
+    image: "/assets/img/wizard.png"
     children:
-      - title: "Quick-Start Guide"
-        url: /
-      - title: "Structure"
-        url: /
-      - title: "Installation"
-        url: /
-      - title: "Upgrading"
-        url: /
-
-  - title: Customization
-    children:
-      - title: "Configuration"
-        url: /
-      - title: "Navigation"
-        url: /
-      - title: "UI Text"
-        url: /
-      - title: "Authors"
-        url: /
-      - title: "Layouts"
-        url: /
-
-  - title: Content
-    children:
-      - title: "Working with Posts"
-        url: /
-      - title: "Working with Pages"
-        url: /
-      - title: "Working with Collections"
-        url: /
-      - title: "Helpers"
-        url: /
-      - title: "Utility Classes"
-        url: /
-
-  - title: Extras
-    children:
-      - title: "Stylesheets"
-        url: /
-      - title: "JavaScript"
-        url: /
+      - title: "Posts"
+        url: /year-archive/
+      - title: "Categories"
+        url: /categories/
+      - title: "Tags"
+        url: /tags/
+      - title: "Pages"
+        url: /page-archive/
