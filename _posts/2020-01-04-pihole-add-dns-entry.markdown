@@ -2,7 +2,11 @@
 layout: single
 title:  "Adding DNS entries to Pihole"
 date:   2020-01-04 20:33:22 -0500
-categories: pihole dns kubernetes
+categories:
+  - dev-ops
+tags:
+  - pihole
+  - kubernetes
 ---
 
 Adding static DNS entries to Pihole can be accomplished by adding entries to the Pihole server's hosts file `/etc/hosts`. For example:
