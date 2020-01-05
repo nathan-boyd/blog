@@ -2,6 +2,31 @@ defaults: &defaults
   working_directory: ~/repo
 version: 2.1
 jobs:
+  bundle:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5
+    environment:
+      BUNDLE_PATH: ~/repo/vendor/bundle
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - rubygems-v1-{{ checksum "Gemfile.lock" }}
+            - rubygems-v1-fallback
+      - run:
+          name: bundle install
+          command: bundle check || bundle install
+      - save_cache:
+          key: rubygems-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - Dockerfile
+            - Gemfile
+            - vendor
   build:
     <<: *defaults
     docker:
@@ -15,16 +40,6 @@ jobs:
             - rubygems-v1-{{ checksum "Gemfile.lock" }}
             - rubygems-v1-fallback
       - run:
-          name: Bundle Install
-          command: bundle check || bundle install
-      - save_cache:
-          key: rubygems-v1-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - run:
-          name: jekyll doctor
-          command: bundle exec jekyll doctor
-      - run:
           name: jekyll build
           command: bundle exec jekyll build
       - persist_to_workspace:
@@ -34,6 +49,21 @@ jobs:
             - Dockerfile
             - Gemfile
             - vendor
+  doctor:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5
+    environment:
+      BUNDLE_PATH: ~/repo/vendor/bundle
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - rubygems-v1-{{ checksum "Gemfile.lock" }}
+            - rubygems-v1-fallback
+      - run:
+          name: jekyll doctor
+          command: bundle exec jekyll doctor
   test:
     <<: *defaults
     docker:
@@ -67,7 +97,23 @@ workflows:
   version: 2
   test-deploy:
     jobs:
+      - bundle:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - doctor:
+          requires:
+            - bundle
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
       - build:
+          requires:
+            - bundle
           filters:
             tags:
               only: /^v.*/
@@ -84,6 +130,7 @@ workflows:
       - publish:
           requires:
             - build
+            - doctor
             - test
           filters:
             tags:
