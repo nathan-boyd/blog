@@ -80,6 +80,7 @@ jobs:
               --file-ignore './_site/404.html' \
               --allow-hash-href \
               --check-html \
+              --empty-alt-ignore \
               --disable-external \
               ./_site
   publish:

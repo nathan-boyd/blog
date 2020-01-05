@@ -54,6 +54,8 @@ test() {
         --volume="$PWD/_site:/_site" \
         18fgsa/html-proofer \
             --file-ignore '/_site/404.html' \
+            --empty-alt-ignore \
+            --disable-external \
             /_site
 
     logInfo "completed testing site"
