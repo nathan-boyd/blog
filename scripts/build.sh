@@ -105,7 +105,7 @@ publish() {
     logInfo "semver is "\""$SEMVER"\"""
 
     build
-    test
+#    test
     doctor
     tag
     publish
