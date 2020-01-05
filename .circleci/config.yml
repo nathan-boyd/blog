@@ -24,6 +24,20 @@ jobs:
       - run:
           name: Jekyll build
           command: bundle exec jekyll build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - _site
+            - Dockerfile
+  test:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5
+    environment:
+      BUNDLE_PATH: ~/repo/vendor/bundle
+    steps:
+      - attach_workspace:
+          at: ./
       - run:
           name: HTMLProofer tests
           command: |
@@ -33,12 +47,7 @@ jobs:
               --check-html \
               --disable-external \
               ./_site
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - _site
-            - Dockerfile
-  deploy:
+  publish:
     <<: *defaults
     docker:
       - image: circleci/golang
@@ -59,9 +68,18 @@ workflows:
               only: /^v.*/
             branches:
               ignore: /.*/
-      - deploy:
+      - test:
           requires:
             - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - publish:
+          requires:
+            - build
+            - test
           filters:
             tags:
               only: /^v.*/
