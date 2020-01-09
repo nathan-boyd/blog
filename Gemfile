@@ -1,15 +1,14 @@
 source "https://rubygems.org"
 
 gem 'jekyll'
-gem "jekyll-feed"
 gem 'jemoji'
 gem 'minimal-mistakes-jekyll'
-
 gem 'html-proofer'
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-gist"
+  gem "jekyll-feed"
   gem "jekyll-include-cache"
   gem "jekyll-optional-front-matter"
   gem "jekyll-paginate"

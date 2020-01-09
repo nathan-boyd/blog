@@ -39,7 +39,7 @@ theme: minimal-mistakes-jekyll
 
 paginate: 5
 
-include: ["_pages", "_layouts"]
+include: ["_pages", "_includes"]
 
 exclude:
   - Gemfile
