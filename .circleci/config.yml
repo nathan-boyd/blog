@@ -30,7 +30,7 @@ jobs:
   build:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.5
+      - image: circleci/ruby:2.7
     environment:
       BUNDLE_PATH: ~/repo/vendor/bundle
     steps:
@@ -52,7 +52,7 @@ jobs:
   doctor:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.5
+      - image: circleci/ruby:2.7
     environment:
       BUNDLE_PATH: ~/repo/vendor/bundle
     steps:
@@ -67,7 +67,7 @@ jobs:
   test:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.5
+      - image: circleci/ruby:2.7
     environment:
       BUNDLE_PATH: ~/repo/vendor/bundle
     steps:
