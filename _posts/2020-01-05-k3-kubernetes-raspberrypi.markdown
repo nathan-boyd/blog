@@ -10,7 +10,7 @@ tags:
   - k3
 ---
 
-[Rachers K3 Github Repository](https://github.com/rancher/k3s) describes K3 as a *Lightweight Kubernetes. Easy to install, half the memory, all in a binary less than 40mb.* These characteristics make K3 ideal for in use in ARM deployments like Raspberry Pi. I've been using K3 at home for several weeks now and have found it to be a suitable replacement for a full Kubernetes deployment.
+[Rachers K3 Github Repository](https://github.com/rancher/k3s#k3s---5-less-than-k8s) describes K3 as a *Lightweight Kubernetes. Easy to install, half the memory, all in a binary less than 40mb.* These characteristics make K3 ideal for in use in ARM deployments like Raspberry Pi. I've been using K3 at home for several weeks now and have found it to be a suitable replacement for a full Kubernetes deployment.
 
 In my experience installation can be performed with simple scripting and takes about two minutes.
 
@@ -19,7 +19,7 @@ In my experience installation can be performed with simple scripting and takes a
   curl -sfL https://get.k3s.io | sh -
 
   # get token from the controller
-  K3S_TOKEN="$(sudo cat /var/lib/rancher/k3s/server/node-token)"
+  K3S_TOKEN="$(cat /var/lib/rancher/k3s/server/node-token)"
 
   # set server url
   K3S_URL="https://myserver:6443"

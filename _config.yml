@@ -1,14 +1,15 @@
-title: "On software"
-name: "Nathan Boyd"
+masthead_title: "Nathan"
+title: on software
+subtitle: on software
+name: Nathan Boyd"
 email: nathan@engineernathan.org
-logo: "/assets/images/wizard.png"
-
+logo: /assets/images/wizard.png
 url: "http://blog.engineernathan.org"
 
 author:
   name: "Nathan Boyd"
-  avatar: "/assets/images/wizard.png"
-  bio: "your host"
+  avatar: "/assets/images/profile.png"
+  bio: "Programming isn't about what you know, it's about what you can figure out."
   location: "Indianapolis"
   links:
     - label: "Twitter"
@@ -38,7 +39,7 @@ theme: minimal-mistakes-jekyll
 
 paginate: 5
 
-include: ["_pages"]
+include: ["_pages", "_layouts"]
 
 exclude:
   - Gemfile
@@ -59,9 +60,8 @@ plugins:
 
 timezone: America/Indianapolis
 
-minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
-
-masthead_title: "On Software"
+# skins: "default" "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
+minimal_mistakes_skin: "dark"
 
 defaults:
   # _posts

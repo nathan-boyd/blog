@@ -13,4 +13,5 @@ docker run --name blog \
     --volume="$PWD:/srv/jekyll" \
     -p 4000:4000 -it \
     jekyll/jekyll:$JEKYLL_VERSION \
-    jekyll serve -I --watch --drafts
+    jekyll serve --incremental --watch --drafts \
+    --config _config.yml,_config_dev.yml
