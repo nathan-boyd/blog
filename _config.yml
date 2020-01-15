@@ -31,8 +31,11 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/nathan-boyd"
 
+twitter:
+  username: nathanboyd
+
 description: > # this means to ignore newlines until "baseurl:"
-  musings
+  Nathan on software
 
 markdown: kramdown
 theme: minimal-mistakes-jekyll
@@ -51,6 +54,7 @@ exclude:
   - vendor/ruby/
 
 plugins:
+  - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
